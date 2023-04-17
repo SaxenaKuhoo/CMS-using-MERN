@@ -1,8 +1,9 @@
 const express=require('express');
 const connectDB = require('./db/connect');
 const app=express();
-const port=3000;
-
+const port=5000;
+const cors = require("cors");
+app.use(cors({ origin: "http://localhost:3000" }))
 const coupons_routes=require("./routes/coupons");
 const users_routes=require("./routes/users");
 

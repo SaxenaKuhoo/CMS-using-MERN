@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const validator=require('validator');
 
 const UserSchema=new mongoose.Schema({
     username:{
@@ -8,11 +9,16 @@ const UserSchema=new mongoose.Schema({
     email:{
         type:String,
         required:[true,"Email id is mandatory to proceed"],
-        unique:true
+        unique:true,
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error("Email is inValid");
+            }
+        }
     },
     password:{
         type:String,
-        required:[true,"Please enter ypur password"],
+        required:[true,"Please enter your password"],
         minlength:8
     },
     coupons:[{
